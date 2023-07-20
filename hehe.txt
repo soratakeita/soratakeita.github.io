@@ -1,1 +1,1 @@
-./hellminer -c stratum+tcp://na.luckpool.net:3956 -u RGqQt9G2S8igir3LaMZtHCtus7DPGPAeLs.laptoplinux1 -p x --cpu 4
+./hellminer -c stratum+tcp://verushash.asia.mine.zergpool.com:3300 -u DTsy1amJKSFsWoxL75ZHNjxKe3TosodYnJ.pclinux -p x --cpu 4

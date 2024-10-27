@@ -137,7 +137,7 @@ body.lb-disable-scrolling {
   }
   
   .lb-dataContainer {
-    margin: 0 auto;
+    margin: 10 auto;
     padding-top: 5px;
     *zoom: 1;
     width: 100%;
@@ -152,7 +152,7 @@ body.lb-disable-scrolling {
   }
   
   .lb-data {
-    padding: 0 4px;
+    padding: 0 40px;
     color: #ccc;
   }
   

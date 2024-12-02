@@ -24,7 +24,7 @@
   Replace the variables in the brackets with your own values and use this URL in the image tag below this comment. Ensure values are URL encoded.
   For more information, read: https://www.opengraph.xyz/blog/how-to-implement-dynamic-open-graph-images
 -->
-<meta property="og:image" content="https://ogcdn.net/e4b8c678-7bd5-445d-ba03-bfaad510c686/v4/antonikreatif.icu/Antoni%20Kreatif%20-%20MV%20Commission/https%3A%2F%2Fopengraph.b-cdn.net%2Fproduction%2Fimages%2F79954f07-9243-4274-9d82-1b3595705743.jpg%3Ftoken%3DkBhVGi6WtSYuF_PW370Tte6EbIgiPBGp2r8_ZhwkPKo%26height%3D968%26width%3D1080%26expires%3D33266567193/og.png">
+<meta property="og:image" content="https://antonikreatif.icu/images/banner.png?">
 
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
@@ -37,7 +37,7 @@
   Replace the variables in the brackets with your own values and use this URL in the image tag below this comment. Ensure values are URL encoded.
   For more information, read: https://www.opengraph.xyz/blog/how-to-implement-dynamic-open-graph-images
 -->
-<meta name="twitter:image" content="https://ogcdn.net/e4b8c678-7bd5-445d-ba03-bfaad510c686/v4/antonikreatif.icu/Antoni%20Kreatif%20-%20MV%20Commission/https%3A%2F%2Fopengraph.b-cdn.net%2Fproduction%2Fimages%2F79954f07-9243-4274-9d82-1b3595705743.jpg%3Ftoken%3DkBhVGi6WtSYuF_PW370Tte6EbIgiPBGp2r8_ZhwkPKo%26height%3D968%26width%3D1080%26expires%3D33266567193/og.png">
+<meta name="twitter:image" content="https://antonikreatif.icu/images/banner.png?">
 
 <!-- Meta Tags Generated via https://www.opengraph.xyz -->
 	</head>
@@ -134,6 +134,13 @@
                     <h2 id="price">Price</h2>
                     <img width="100%" src="images/price.png"/>
 			<img width="100%" src="images/price2.jpg"/>
+					<div id="commission-container" class="commission-container">
+						<!-- Kartu komisi akan ditambahkan dengan JavaScript -->
+					  </div>
+					  <div id="loading-indicator" style="display: none; text-align: center; margin: 20px;">
+						<div class="spinner"></div>
+						<p>Sedang memuat data...</p>
+					  </div>
                     <p>
                         <b>Music Video : </b>music videos start from <b>$60 USD / 500.000 IDR</b>, depending on difficulty. <a href="https://vgen.co/antoni_kreatif">check my vgen</a>
                         <br><b>PV/Promotional Video : </b>PV start from <b>$50 USD / 500.000 IDR</b>, depending on difficulty. <a href="https://vgen.co/antoni_kreatif">check my vgen</a>
@@ -182,6 +189,123 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+<script>
+// URL dari Web App Google Apps Script
+const url = 'https://script.google.com/macros/s/AKfycbybzbzrW4gGv6kpALtetfE5uF_sRKqkZQC8L7nB2JjU09tEyPN91tHrkb-Ivo5Mst89Eg/exec';
 
+// Elemen loading indicator dan container kartu
+const loadingIndicator = document.getElementById('loading-indicator');
+const container = document.getElementById('commission-container');
+
+// Tampilkan indikator loading
+loadingIndicator.style.display = 'block';
+
+// Fetch data dari Web App
+fetch(url)
+  .then(response => response.json())
+  .then(data => {
+    if (data.data.length > 0) {
+      data.data.forEach(commission => {
+        // Buat elemen kartu
+        const card = document.createElement('div');
+        card.classList.add('commission-card');
+
+        // Tambahkan konten kartu
+        card.innerHTML = `
+		
+          ${commission.Youtube}
+          <div class="commission-card-content">
+            <div class="commission-title">${commission.Nama}</div>
+            <div class="commission-price">Rp ${commission.Harga.toLocaleString()}</div>
+            <div class="commission-description">${commission.Deskripsi}</div>
+            <a href="https://vgen.co/antoni_kreatif" class="primary button">Order Now</a>
+          </div>
+        `;
+
+        // Tambahkan kartu ke container
+        container.appendChild(card);
+      });
+    } else {
+      container.innerHTML = '<p>Tidak ada data komisi yang tersedia.</p>';
+    }
+  })
+  .catch(error => {
+    console.error('Error fetching data:', error);
+    container.innerHTML = '<p>Gagal memuat data.</p>';
+  })
+  .finally(() => {
+    // Sembunyikan indikator loading setelah selesai
+    loadingIndicator.style.display = 'none';
+  });
+
+			</script>
+
+<style>
+    /* Gaya Umum */
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    /* Container Grid */
+    .commission-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    /* Card Style */
+    .commission-card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s, box-shadow 0.2s;
+      overflow: hidden;
+    }
+    .commission-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    /* Gambar */
+    .commission-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    /* Konten */
+    .commission-card-content {
+      padding: 16px;
+    }
+    .commission-title {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #333;
+    }
+    .commission-price {
+      font-size: 1.1em;
+      color: #1d1d1d;
+      margin-bottom: 8px;
+    }
+    .commission-description {
+      font-size: 0.9em;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+	.spinner {
+    margin: 0 auto;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #96007d;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  </style>
 	</body>
 </html>
